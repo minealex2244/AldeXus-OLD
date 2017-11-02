@@ -120,13 +120,13 @@ dev)
   echo "minealex2244"
   ;;
 codename)
-  echo "AldeLOS"
+  echo "AldeXus"
   ;;    
 version)
   echo `busybox uname -r`
   ;;
 kernel_version)
-  echo "1.3"
+  echo "1.0"
   ;;
 android_version)
   echo `getprop ro.build.version.release`
