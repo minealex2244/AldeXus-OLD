@@ -4,6 +4,8 @@ SUBLEVEL = 107
 EXTRAVERSION = -XXS5EQG2
 NAME = TOSSUG Baby Fish
 
+TOOLCHAIN_DIR =/home/minealex2244/Desktop/SM-G920F/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
 # More info can be located in ./README
