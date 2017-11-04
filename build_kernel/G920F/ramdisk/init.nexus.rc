@@ -25,3 +25,11 @@ on post-fs-data
 
 	# Launch USNF
     exec u:r:su:s0 root root -- /sbin/usnf
+    start sysinit
+
+# sysinit (/system/etc/init.d)
+service sysinit /system/bin/sysinit
+    user root
+    oneshot
+    disabled
+
