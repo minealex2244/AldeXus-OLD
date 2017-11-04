@@ -405,7 +405,6 @@ KBUILD_CFLAGS := \
 	-Ofast \
 	-std=gnu89 \
 	-Wall \
-	-Werror \
 	-Wno-format-security \
 	-Wno-maybe-uninitialized \
 	-Wno-trigraphs \
