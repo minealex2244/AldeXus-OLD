@@ -1,8 +1,9 @@
 VERSION = 3
 PATCHLEVEL = 10
-SUBLEVEL = 107
+<<<<<<< HEAD
+SUBLEVEL = 108
 EXTRAVERSION = -XXS5EQG2
-NAME = TOSSUG Baby Fish
+NAME = END-OF-LIFE
 
 TOOLCHAIN_DIR =/home/minealex2244/Desktop/SM-G920F/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 
