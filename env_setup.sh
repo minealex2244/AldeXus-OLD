@@ -84,6 +84,26 @@ if [ "$TARGET" = "G925W8" ] ; then
 	export KERNEL_CONFIG="lineageos_zeroltecan_defconfig";
 fi;
 
+# G920P
+if [ "$TARGET" = "G920P" ] ; then
+	export KERNEL_CONFIG="lineageos_zerofltespr_defconfig";
+fi;
+
+# G925P
+if [ "$TARGET" = "G925P" ] ; then
+	export KERNEL_CONFIG="lineageos_zeroltespr_defconfig";
+fi;
+
+# G920S
+if [ "$TARGET" = "G920S" ] ; then
+	export KERNEL_CONFIG="lineageos_zerofltexx_defconfig";
+fi;
+
+# G925S
+if [ "$TARGET" = "G925S" ] ; then
+	export KERNEL_CONFIG="lineageos_zeroltexx_defconfig";
+fi;
+
 # build script
 export USER=`whoami`;
 export TMPFILE=`mktemp -t`;
