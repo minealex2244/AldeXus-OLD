@@ -3750,13 +3750,13 @@ static inline unsigned int hmp_domain_min_load(struct hmp_domain *hmpd,
 /* Check if cpu is in fastest hmp_domain */
 static inline unsigned int hmp_cpu_is_fastest(int cpu)
 {
-	return !!(cpu & 0xF0); // mask 1111 0000
+	return !!((1 << cpu) & 0xF0); // mask 1111 0000
 }
 
 /* Check if cpu is in slowest hmp_domain */
 static inline unsigned int hmp_cpu_is_slowest(int cpu)
 {
-	return !!(cpu & 0x0F); // mask 0000 1111
+	return !!((1 << cpu) & 0x0F); // mask 0000 1111
 }
 
 /* Next (slower) hmp_domain relative to cpu */
