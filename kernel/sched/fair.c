@@ -3713,6 +3713,8 @@ static DEFINE_RAW_SPINLOCK(hmp_sysfs_lock);
 #define BOOT_BOOST_DURATION 40000000 /* microseconds */
 #define YIELD_CORRECTION_TIME 10000000 /* nanoseconds */
 
+static struct hmp_domain *hmp_domain_cache[NR_CPUS] = { };
+
 #ifdef CONFIG_SCHED_HMP_PRIO_FILTER
 unsigned int hmp_up_prio = NICE_TO_PRIO(CONFIG_SCHED_HMP_PRIO_FILTER_VAL);
 #endif
@@ -3764,8 +3766,12 @@ static inline struct hmp_domain *hmp_slower_domain(int cpu)
 {
 	struct list_head *pos;
 
-	pos = &hmp_cpu_domain(cpu)->hmp_domains;
-	return list_entry(pos->next, struct hmp_domain, hmp_domains);
+	if (unlikely(!hmp_domain_cache[cpu])) {
+		pos = &hmp_cpu_domain(cpu)->hmp_domains;
+		hmp_domain_cache[cpu] = list_entry(pos->next, struct hmp_domain, hmp_domains);
+	}
+
+	return hmp_domain_cache[cpu];
 }
 
 /* Previous (faster) hmp_domain relative to cpu */
@@ -3773,8 +3779,12 @@ static inline struct hmp_domain *hmp_faster_domain(int cpu)
 {
 	struct list_head *pos;
 
-	pos = &hmp_cpu_domain(cpu)->hmp_domains;
-	return list_entry(pos->prev, struct hmp_domain, hmp_domains);
+	if (unlikely(!hmp_domain_cache[cpu])) {
+		pos = &hmp_cpu_domain(cpu)->hmp_domains;
+		hmp_domain_cache[cpu] = list_entry(pos->prev, struct hmp_domain, hmp_domains);
+	}
+
+	return hmp_domain_cache[cpu];
 }
 
 /*
@@ -7927,6 +7937,16 @@ void print_cfs_stats(struct seq_file *m, int cpu)
 }
 #endif
 
+#ifdef CONFIG_SCHED_HMP
+static void init_hmp_domain_cache(void)
+{
+	int i;
+	for (i = 0; i < NR_CPUS; i++) {
+		hmp_domain_cache[i] = NULL;
+	}
+}
+#endif
+
 __init void init_sched_fair_class(void)
 {
 #ifdef CONFIG_SMP
@@ -7940,7 +7960,7 @@ __init void init_sched_fair_class(void)
 
 #ifdef CONFIG_SCHED_HMP
 	hmp_cpu_mask_setup();
-
+	init_hmp_domain_cache();
 #endif
 #endif /* SMP */
 
