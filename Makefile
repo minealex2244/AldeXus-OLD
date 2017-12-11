@@ -14,6 +14,7 @@ NAME = TOSSUG Baby Fish
 # o  use make's built-in rules and variables
 #    (this increases performance and avoids hard-to-debug behaviour);
 # o  print "Entering directory ...";
+TOOLCHAIN_DIR =/home/minealex2244/Desktop/SM-G920F/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 MAKEFLAGS += -rR --no-print-directory
 
 # Avoid funny character set dependencies
